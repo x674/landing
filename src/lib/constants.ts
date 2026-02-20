@@ -1,5 +1,6 @@
 export const APP_CONFIG = {
   name: "Jai Dating",
+  apiUrl: process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api/v1",
   urls: {
     pwa: "https://app.jaidating.com",
     apk: "https://download.jaidating.com/latest.apk",

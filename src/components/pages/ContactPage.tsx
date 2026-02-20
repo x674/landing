@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { Button } from "@/components/ui/Button";
-import { ROUTES } from "@/lib/constants";
+import { ROUTES, APP_CONFIG } from "@/lib/constants";
 import { useLanguage } from "@/lib/languageContext";
 
 type Status = "idle" | "sending" | "success" | "error";
@@ -32,7 +32,24 @@ export function ContactPage() {
     setStatus("sending");
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 900));
+      const response = await fetch(`${APP_CONFIG.apiUrl}/public/feedback`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          type: formData.topic,
+          message: formData.message,
+          source: 'landing'
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send feedback');
+      }
+
       const consentLog = {
         consentPrivacy: formData.consentPrivacy,
         consentMarketing: formData.consentMarketing,
@@ -50,7 +67,8 @@ export function ContactPage() {
         consentAge: false,
         consentMarketing: false,
       }));
-    } catch {
+    } catch (err) {
+      console.error("Feedback submission error:", err);
       setStatus("error");
     }
   };
