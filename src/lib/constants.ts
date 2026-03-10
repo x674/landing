@@ -2,13 +2,13 @@ export const APP_CONFIG = {
   name: "Jai Dating",
   apiUrl: process.env.NEXT_PUBLIC_API_URL || "https://api.jai-dating.com/api/v1",
   urls: {
-    pwa: "https://app.jaidating.com",
-    apk: "https://download.jaidating.com/latest.apk",
+    pwa: "https://app.jai-dating.com",
+    apk: "https://download.jai-dating.com/latest.apk",
     playStore: null, // Coming soon
     appStore: null, // Coming soon
   },
   placeholders: {
-    supportEmail: "support@jaidating.com",
+    supportEmail: "support@jai-dating.com",
     fullName: "Jane Doe",
     country: "Thailand",
     taxStatus: "Sole Proprietor / Freelancer",
